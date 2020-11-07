@@ -1,0 +1,58 @@
+@startuml Chess
+
+	class Chess
+	class Turn
+	class Player
+	class Board
+	class Color
+	class White
+	class Black
+    class Piece
+
+	Chess *--> Turn
+	Chess *--> Board
+	Chess *--> "2" Player
+
+	Board *--> "8*8" Square
+	Board o--> "32" Piece
+	Square *--> Coordinate
+
+	Coordinate *--> Letter
+	Coordinate *-->Number
+
+	Turn *--> "2" Player
+
+	Player *--> Color
+	Player ..> "n" Movement
+	Player o-->"16" Piece
+	Player *-- King
+	Player *-- Queen
+	Player *-- "2" Bishop
+	Player *-- "2" Knight
+	Player *-- "2" Rook
+	Player *-- "8" Pawn
+
+	Color <|-- White
+	Color <|-- Black
+
+	Piece *--> Movement
+	Piece *--> Coordinate
+
+	Movement *-- Coordinate
+	Movement *-- Rule
+
+	Rule <|-- Direction
+	Rule <|-- Kill
+
+	Direction <|-- Horizontal
+	Direction <|-- Vertical
+	Direction <|-- Diagonal
+	Direction <|-- L
+
+	Piece <|-- Pawn
+	Piece <|-- Bishop
+	Piece <|-- Knight
+	Piece <|-- Rook
+	Piece <|-- Queen
+	Piece <|-- King
+@enduml

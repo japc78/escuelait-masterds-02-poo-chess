@@ -4,6 +4,11 @@
 	class Turn
 	class Player
 	class Board
+	class Square
+
+	class Coordinate
+	class Letter
+	class Number
 
 	class Piece
 	class Pawn
@@ -16,7 +21,9 @@
 	class Color
 	class White
 	class Black
-	class Move
+	class Movement
+
+
 
 	Chess *--> Turn
 	Chess *--> Board
@@ -25,8 +32,13 @@
 	Turn *--> "2" Player
 
 	Board o--> "32" Piece
+	Board *--> "8*8" Square
+	Square *--> Coordinate
 
-	Player ..> "1..*" Move
+	Coordinate *--> Letter
+	Coordinate *-->Number
+
+	Player ..> "1..*" Movement
 	Player *--> Color
 	Player o--> Piece
 	Player *-- King
@@ -36,7 +48,7 @@
 	Player *-- "2" Rook
 	Player *-- "8" Pawn
 
-  Player *-- Goal
+  	Player *-- Goal
 	Goal ..> toOpponentSquare
 	Goal ..> King
 
@@ -49,16 +61,20 @@
 	Piece <|-- Rook
 	Piece <|-- Queen
 	Piece <|-- King
-	Piece *--> Position
-    Piece *-- "0..*" Move
-	Piece *-- MoveRule
-
-	Move *-- Destination
-	MoveRule *-- Direction
-	MoveRule *-- Quantity
+	Piece *--> InitialPosition
+    Piece *-- "0..*" Movement
 
 	Destination <|-- toFreeSquare
 	Destination <|-- toOpponentSquare
+	Destination *--> Coordinate
+
+	Direction *--> InitialPosition
+	Direction *--> Destination
+
+	InitialPosition *--> Coordinate
+
+	Movement *--> Direction
+	Movement *--> Quantity
 
 	Direction <|-- Horizontal
 	Direction <|-- Vertical

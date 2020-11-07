@@ -1,0 +1,85 @@
+@startuml Chess
+
+	class Chess
+	class Turn
+	class Player
+	class Board
+    class Square
+	class FreeSquare
+	class BusySquare
+    class Origin
+    class Coordinate
+    class RuleMove
+
+	class Piece
+	class Pawn
+	class Rook
+	class Knight
+	class Bishop
+	class Queen
+	class King
+	class Color
+	class White
+	class Black
+	class Movimiento
+	class Target
+
+
+
+
+
+	Chess *--> Turn
+	Chess *--> Board
+	Chess *--> "2" Player
+
+	Turn --> Player
+
+    Board *--> "8x8" Square
+
+	Player ..> "*" Movimiento : Realiza
+	Player *--> Color
+	Player *-- King
+	Player *-- Queen
+	Player *-- "2" Bishop
+	Player *-- "2" Knight
+	Player *-- "2" Rook
+	Player *-- "8" Pawn
+
+	Color <|-- White
+	Color <|-- Black
+
+	Piece *--> "1..*" RuleMove
+	Piece <|-- Pawn
+	Piece <|-- Bishop
+	Piece <|-- Knight
+	Piece <|-- Rook
+	Piece <|-- Queen
+	Piece <|-- King
+
+	Piece --> "1" Origin
+
+	'Square o--> "0..1" Piece
+
+	Movimiento *-- Destination
+    Movimiento *-- Origin
+	Movimiento ..> Piece : Move
+
+    Square <|-- Destination
+    Square <|-- Origin
+    Square *--> Coordinate
+
+	Destination <|-- FreeSquare
+	Destination <|-- BusySquare
+	BusySquare --> Target
+	Target --> King
+
+	RuleMove <|-- Horizontal
+	RuleMove <|-- Vertical
+	RuleMove <|-- Diagonal
+	RuleMove <|-- L
+
+
+    Diagonal o--> Steps
+    Horizontal o--> Steps
+    Vertical o--> Steps
+@enduml
