@@ -36,6 +36,9 @@
 	Player *-- "2" Rook
 	Player *-- "8" Pawn
 	Player ..> "*" Movement
+	Player *-- Goal
+	Goal ..> toOpponentSquare
+	Goal ..> King
 
 	Color <|-- White
 	Color <|-- Black
