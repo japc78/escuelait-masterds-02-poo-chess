@@ -1,4 +1,4 @@
-@startuml Chess
+@startuml ChessDomainModel_v1
 
 	class Chess
 	
