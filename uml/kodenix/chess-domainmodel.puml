@@ -1,4 +1,6 @@
-@startuml ChessDomainModel_v1
+@startuml ChessDomainModel_v1_0_1
+
+	title Chess Domain Model Version 1.0.1
 
 	class Chess
 	
@@ -51,9 +53,10 @@
 	class Destination
 	class Checkmate
 
-	Chess *--> Turn
+	Chess *--> "1" Turn
 	Chess *--> Board
-	Turn *--> "2" Player
+	Chess *--> "2" Player
+	Turn --> "1" Player
 
     Board *--> "8x8" Square
 
@@ -83,6 +86,7 @@
 
 	Piece --> Color
 
+	Movement ..> Turn : change
 	Movement ..> "To" Destination
     Movement ..> "From" Square
 	Movement --> Piece
