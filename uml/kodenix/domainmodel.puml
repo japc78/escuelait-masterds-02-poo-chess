@@ -2,15 +2,18 @@
 
 	class Chess
 	class Turn
-	class Player
+	
 	class Board
     class Square
 	class FreeSquare
 	class BusySquare
-    class Origin
+    class CurrentSquare
     class Coordinate
     class RuleMove
-
+	together {
+		class Player
+	
+	}
 	class Piece
 	class Pawn
 	class Rook
@@ -21,11 +24,12 @@
 	class Color
 	class White
 	class Black
-	class Movimiento
+	class Movement
 	class Target
-
-
-
+	class Steps
+	class OneStep
+	class ManySteps
+	class DestinationSquare
 
 
 	Chess *--> Turn
@@ -36,7 +40,7 @@
 
     Board *--> "8x8" Square
 
-	Player ..> "*" Movimiento : Realiza
+	Player ..> Movement
 	Player *--> Color
 	Player *-- King
 	Player *-- Queen
@@ -44,6 +48,7 @@
 	Player *-- "2" Knight
 	Player *-- "2" Rook
 	Player *-- "8" Pawn
+	Player --> Target
 
 	Color <|-- White
 	Color <|-- Black
@@ -56,30 +61,33 @@
 	Piece <|-- Queen
 	Piece <|-- King
 
-	Piece --> "1" Origin
+	Piece --> "1" CurrentSquare
 
-	'Square o--> "0..1" Piece
+	Piece --> Color
 
-	Movimiento *-- Destination
-    Movimiento *-- Origin
-	Movimiento ..> Piece : Move
+	Movement *-- DestinationSquare
+    Movement *-- CurrentSquare
+	Movement --> Piece
 
-    Square <|-- Destination
-    Square <|-- Origin
+    Square <|-- DestinationSquare
+    Square <|-- CurrentSquare
     Square *--> Coordinate
 
-	Destination <|-- FreeSquare
-	Destination <|-- BusySquare
-	BusySquare --> Target
-	Target --> King
+	DestinationSquare <|-- FreeSquare
+	DestinationSquare <|-- BusySquare
+	BusySquare <|-- Target
+	Target --> King	
 
 	RuleMove <|-- Horizontal
 	RuleMove <|-- Vertical
 	RuleMove <|-- Diagonal
 	RuleMove <|-- L
 
+	Horizontal o-->   Steps
+	Vertical o-->   Steps
+	Diagonal o-->   Steps
 
-    Diagonal o--> Steps
-    Horizontal o--> Steps
-    Vertical o--> Steps
+	 Steps ^-- OneStep
+	 Steps ^-- ManySteps
+
 @enduml
