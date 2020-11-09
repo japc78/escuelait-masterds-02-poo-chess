@@ -30,4 +30,10 @@ public class Square {
 		// System.out.print(coordinate.getColumn());
 	}
 
+	public void removePiece() {
+		this.piece = null;
+	}
+
+
+
 }

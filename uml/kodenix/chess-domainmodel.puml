@@ -61,7 +61,7 @@
     Board *--> "8x8" Square
 
 	Player ..> "*" Movement
-	Player *--> Color
+	Player o--> Color
 	Player o--> "16" Piece
 	Player --> Destination
 	Player --> Board
@@ -94,6 +94,7 @@
     Movement ..> "From" Square
 	Movement --> Piece
 	Movement o--> MatchResult
+	Movement --> Board
 
 	MatchResult ^-- Checkmate
 	MatchResult ^-- Capture

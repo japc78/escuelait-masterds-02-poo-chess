@@ -75,11 +75,18 @@
 		+Piece getPiece()
 	}
 
+	class Movement {
+		+Movement(Coordinate origin, Coordinate destination)
+		+MatchResult getResult()
+	}
+
 	class MatchResult {
-		+boolean isCapture()
+		+boolean getType()
 		+boolean isEmpty()
 		+boolean isCheckmate()
 	}
+
+	
 
 
 	Chess *--> "1" Board
@@ -93,7 +100,9 @@
 	Square o--> "0..1" Piece
 	Square o--> "1" Coordinate
 	Piece --> Coordinate
-
+	Player ..> Movement
+	Movement *--> MatchResult
+	Movement --> Board
 
 
 	

@@ -11,21 +11,23 @@ class Chess {
 	
 	Chess() {
 		this.turn = 0;
-		this.initializePlayers();
-		Piece[] pieces = this.generatePieces();
-		this.board = new Board(pieces);
+		this.board = new Board();
+		this.players = this.initializePlayers(board);
+		Piece[] pieces = this.generatePieces(this.players);
+		board.placePieces(pieces);
+		
 	}
 	
 	public void play() {
 		
-		/*do {
-			this.players[turn].sayMyColor();
-			
+		do {
+			Player currentPlayer = this.players[turn];
+			System.out.println("Turn for Player: " + currentPlayer.getColor());
+			board.show();
+			currentPlayer.makeMove();
 			this.changeTurn();
 		} while (!this.players[this.turn].isWinner());
-		this.players[this.turn].sayWinner();
-		*/
-		board.show();
+		
 		
 	}
 	
@@ -36,7 +38,7 @@ class Chess {
 		
 	}
 
-	private Piece[] generatePieces() {
+	private Piece[] generatePieces(Player[] players) {
 		Piece[] allPieces = new Piece[8];
 	
 		allPieces[0] = new Rook(players[0]);
@@ -52,9 +54,11 @@ class Chess {
 		return allPieces;
 	}
 
-	private void initializePlayers() {
+	private Player[] initializePlayers(Board board) {
+		Player[] players = new Player[2];
 		players[0] = new Player(Color.WHITE, board);
 		players[1] = new Player(Color.BLACK, board);
+		return players;
 	}
 	
 

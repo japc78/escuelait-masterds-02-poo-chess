@@ -31,4 +31,8 @@ public abstract class Piece {
 		this.placedOnBoard = true;
 	}
 
+	public boolean isValidDestination(Coordinate destination) {
+		return true;
+	}
+
 }

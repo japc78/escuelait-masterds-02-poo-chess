@@ -3,12 +3,15 @@ public class Board {
 	
 	Square[][] squares = new Square[8][8];
 
-	public Board(Piece[] pieces) {
-		this.generateSquare();
+	public Board() {
+		this.generateSquares();
+	}
+
+	public void placePieces(Piece[] pieces) {
 		this.placePiecesOnSquare(pieces);
 	}
 
-	private void generateSquare() {
+	private void generateSquares() {
 		for (int i=0; i < squares.length; i++) {
 			for (int j=0; j < squares[i].length; j++) {
 				Coordinate coordinate = new Coordinate(i, j);
@@ -30,7 +33,7 @@ public class Board {
 		}		
 	}
 	
-	private Square getSquare(Coordinate coordinate) {
+	public Square getSquare(Coordinate coordinate) {
 		return this.squares[coordinate.getRow()][coordinate.getColumn()];
 	}
 
@@ -63,7 +66,7 @@ public class Board {
 	}
 
 	private void printColumnFooterBoard() {
-		// this.printColumHeadBoard();
+		this.printColumHeadBoard();
 		
 	}
 
