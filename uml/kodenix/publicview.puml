@@ -1,0 +1,102 @@
+@startuml Chess
+
+	class Chess {
+		-Player turn
+		+play()
+	}
+	class Turn
+	
+	class Board {
+		+show()
+	}
+    class Square
+	class FreeSquare
+	class BusySquare
+    class CurrentSquare
+    class Coordinate
+    class RuleMove
+	together {
+		class Player
+	
+	}
+	class Piece
+	class Pawn
+	class Rook
+	class Knight
+	class Bishop
+	class Queen
+	class King
+	enum Color {
+		Black
+		White
+	}
+	
+	class Movement {
+		+Movement(Piece piece, CurrentSquare square, DestinationSquare destination)
+		+isCorrect()
+		+isWinner()
+	}
+	class Target
+	enum Steps {
+		OneStep
+		ManySteps
+	}
+	
+	class DestinationSquare
+
+
+	Chess *--> Turn
+	Chess *--> Board
+	Chess *--> "2" Player
+
+	Turn --> Player
+
+    Board *--> "8x8" Square
+
+	Player ..> Movement
+	Player *--> Color
+	Player *-- King
+	Player *-- Queen
+	Player *-- "2" Bishop
+	Player *-- "2" Knight
+	Player *-- "2" Rook
+	Player *-- "8" Pawn
+	Player --> Target
+
+	
+
+	Piece *--> "1..*" RuleMove
+	Piece <|-- Pawn
+	Piece <|-- Bishop
+	Piece <|-- Knight
+	Piece <|-- Rook
+	Piece <|-- Queen
+	Piece <|-- King
+
+	Piece --> "1" CurrentSquare
+
+	Piece --> Color
+
+	Movement *-- DestinationSquare
+    Movement *-- CurrentSquare
+	Movement --> Piece
+
+    Square <|-- DestinationSquare
+    Square <|-- CurrentSquare
+    Square *--> Coordinate
+
+	DestinationSquare <|-- FreeSquare
+	DestinationSquare <|-- BusySquare
+	BusySquare <|-- Target
+	Target --> King	
+
+	RuleMove <|-- Horizontal
+	RuleMove <|-- Vertical
+	RuleMove <|-- Diagonal
+	RuleMove <|-- L
+
+	Horizontal o-->   Steps
+	Vertical o-->   Steps
+	Diagonal o-->   Steps
+
+@enduml

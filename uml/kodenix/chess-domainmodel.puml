@@ -63,6 +63,9 @@
 	Player ..> "*" Movement
 	Player *--> Color
 	Player o--> "16" Piece
+	Player --> Destination
+	Player --> Board
+
 	/'Player *-- King
 	Player *-- Queen
 	Player *-- "2" Bishop
@@ -100,6 +103,9 @@
 	Square o--> "0..1" Piece
     Square <|-- Destination
     Square *--> Coordinate
+
+	Coordinate *--> Row
+	Coordinate *--> Column
 
 	Destination <|-- Empty
 	Destination <|-- Opponent
